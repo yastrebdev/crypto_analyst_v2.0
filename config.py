@@ -1,0 +1,33 @@
+import os
+
+from dotenv import load_dotenv
+
+load_dotenv()
+
+SILVER_POSTGRES_USER = os.getenv("SILVER_POSTGRES_USER")
+SILVER_POSTGRES_PASSWORD = os.getenv("SILVER_POSTGRES_PASSWORD")
+SILVER_POSTGRES_DB = os.getenv("SILVER_POSTGRES_DB")
+SILVER_POSTGRES_HOST = "postgres-silver"
+SILVER_POSTGRES_PORT = 5432
+
+CLICKHOUSE_DB = os.getenv("CLICKHOUSE_DB")
+CLICKHOUSE_USER = os.getenv("CLICKHOUSE_USER")
+CLICKHOUSE_PASSWORD = os.getenv("CLICKHOUSE_PASSWORD")
+CLICKHOUSE_HOST = "clickhouse"
+CLICKHOUSE_PORT = 9000
+
+KAFKA_BOOTSTRAP_SERVERS = "kafka:9092"
+
+GF_ADMIN_USER = os.getenv("GF_ADMIN_USER")
+GF_ADMIN_PASSWORD = os.getenv("GF_ADMIN_PASSWORD")
+
+MINIO_ROOT_USER = os.getenv("MINIO_ROOT_USER")
+MINIO_ROOT_PASSWORD = os.getenv("MINIO_ROOT_PASSWORD")
+MINIO_BUCKET = "bronze"
+
+YOUTUBE_API_KEY = os.getenv("YOUTUBE_API_KEY")
+NEWSAPI_API_KEY = os.getenv("NEWSAPI_API_KEY")
+
+BLOCKSTREAM_API = "https://blockstream.info/api"
+FEAR_GREED = "https://api.alternative.me/fng/"
+BINANCE_WS_URL = "wss://stream.binance.com:9443/ws/"

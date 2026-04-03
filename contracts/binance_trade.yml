@@ -1,0 +1,64 @@
+name: binance_trade
+version: 1.0
+owner: yastrebov
+description: "Raw trades from Binance WebSocket"
+status: active
+created_at: "2026-04-01"
+updated_at: "2026-04-01"
+
+producers:
+  - binance_producer
+
+consumers:
+  - trades_consumer
+  - spark_correlations
+
+fields:
+  - name: e
+    alias: event_type
+    type: string
+    constraints:
+      - not_null
+      - accepted_values: [trade]
+  - name: E
+    alias: event_time
+    type: int
+    constraints:
+      - not_null
+      - positive
+  - name: s
+    alias: symbol
+    type: string
+    constraints:
+      - not_null
+      - accepted_values: [BTCUSDT]
+  - name: t
+    alias: trade_id
+    type: int
+    constraints:
+      - not_null
+      - positive
+  - name: p
+    alias: price
+    type: string
+    constraints:
+      - not_null
+      - numeric_string
+      - positive
+  - name: q
+    alias: quantity
+    type: string
+    constraints:
+      - not_null
+      - numeric_string
+      - positive
+  - name: T
+    alias: trade_time
+    type: int
+    constraints:
+      - not_null
+      - positive
+  - name: m
+    alias: market_maker
+    description: "Is the buyer the market maker?"
+    type: bool
