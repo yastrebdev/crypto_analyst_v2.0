@@ -1,6 +1,6 @@
 FROM apache/airflow:3.1.8
 ENV PYTHONPATH=/opt/airflow
-USER root
+USER airflow
 RUN pip install dbt-postgres \
     clickhouse-driver==0.2.10 \
     kafka-python-ng \
@@ -8,5 +8,3 @@ RUN pip install dbt-postgres \
     transformers \
     vaderSentiment
 #    torch
-
-USER airflow

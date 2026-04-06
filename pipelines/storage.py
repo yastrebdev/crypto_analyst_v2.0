@@ -1,5 +1,6 @@
 import json
 import logging
+from datetime import datetime
 
 import boto3
 
@@ -28,7 +29,8 @@ def init_storage():
 
 
 def flush_to_s3(date: str, hour: int, prefix: str, body: list[dict]):
-    key = f"raw/{prefix}/date={date}/hour={hour}/raw.json"
+    now = datetime.now()
+    key = f"raw/{prefix}/date={date}/hour={hour}/{now.strftime('%M%S')}.json"
 
     s3.put_object(
         Bucket=MINIO_BUCKET,

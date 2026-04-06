@@ -24,10 +24,11 @@ GF_ADMIN_PASSWORD = os.getenv("GF_ADMIN_PASSWORD")
 MINIO_ROOT_USER = os.getenv("MINIO_ROOT_USER")
 MINIO_ROOT_PASSWORD = os.getenv("MINIO_ROOT_PASSWORD")
 MINIO_BUCKET = "bronze"
+MINIO_PORT = 9001
 
 YOUTUBE_API_KEY = os.getenv("YOUTUBE_API_KEY")
 NEWSAPI_API_KEY = os.getenv("NEWSAPI_API_KEY")
 
 BLOCKSTREAM_API = "https://blockstream.info/api"
-FEAR_GREED = "https://api.alternative.me/fng/"
+FEAR_GREED = "https://api.alternative.me/fng"
 BINANCE_WS_URL = "wss://stream.binance.com:9443/ws/"
