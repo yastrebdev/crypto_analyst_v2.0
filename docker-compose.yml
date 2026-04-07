@@ -343,6 +343,23 @@ services:
       - ${AIRFLOW_PROJ_DIR:-.}/utils:/opt/airflow/utils
     restart: unless-stopped
 
+  s3-consumer:
+    build: .
+    container_name: s3-consumer
+    command: python /opt/airflow/pipelines/s3_consumer.py
+    depends_on:
+      - kafka
+      - minio
+    env_file:
+      - .env
+    environment:
+      PYTHONPATH: /opt/airflow
+      PYTHONUNBUFFERED: "1"
+    volumes:
+      - ${AIRFLOW_PROJ_DIR:-.}/pipelines:/opt/airflow/pipelines
+      - ${AIRFLOW_PROJ_DIR:-.}/config.py:/opt/airflow/config.py
+    restart: unless-stopped
+
   binance-producer:
     build: .
     container_name: binance-producer
@@ -414,6 +431,8 @@ services:
       MINIO_ROOT_USER: ${MINIO_ROOT_USER}
       MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}
     command: server /data --console-address ":9001"
+    volumes:
+      - minio-data:/var/lib/minio
 
   grafana:
     image: grafana/grafana:11.4.0
@@ -433,3 +452,4 @@ volumes:
   spark-ivy-cache:
   postgres-silver-data:
   grafana-data:
+  minio-data:

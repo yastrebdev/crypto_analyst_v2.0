@@ -1,13 +1,15 @@
 from datetime import datetime, timezone
 from typing import Literal
 
+from models import Candle
+
 CandleInterval = Literal["1m", "5m", "10m"]
 
 
 def aggregate_candle(
     trades: list[dict],
     candle_interval: CandleInterval
-) -> dict:
+) -> Candle:
     sort_trades_by_trade_time = sorted(trades, key=lambda t: t["T"])
     first_trade = sort_trades_by_trade_time[0]
     last_trade = sort_trades_by_trade_time[-1]
