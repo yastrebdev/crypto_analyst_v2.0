@@ -324,6 +324,25 @@ services:
       interval: 10s
       retries: 5
 
+  binance-consumer:
+    build: .
+    container_name: binance-consumer
+    command: python /opt/airflow/pipelines/binance_consumer.py
+    depends_on:
+      - kafka
+      - postgres-silver
+    env_file:
+      - .env
+    environment:
+      PYTHONPATH: /opt/airflow
+      PYTHONUNBUFFERED: "1"
+    volumes:
+      - ${AIRFLOW_PROJ_DIR:-.}/pipelines:/opt/airflow/pipelines
+      - ${AIRFLOW_PROJ_DIR:-.}/config.py:/opt/airflow/config.py
+      - ${AIRFLOW_PROJ_DIR:-.}/db.py:/opt/airflow/db.py
+      - ${AIRFLOW_PROJ_DIR:-.}/utils:/opt/airflow/utils
+    restart: unless-stopped
+
   binance-producer:
     build: .
     container_name: binance-producer

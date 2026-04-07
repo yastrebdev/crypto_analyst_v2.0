@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Literal
 
 CandleInterval = Literal["1m", "5m", "10m"]
@@ -19,13 +19,13 @@ def aggregate_candle(
     volume = sum(float(t["q"]) for t in trades)
     trade_count = len(trades)
 
+    first_trade["T"] = datetime.fromtimestamp(first_trade["T"] / 1000, tz=timezone.utc)
+    last_trade["T"] = datetime.fromtimestamp(last_trade["T"] / 1000, tz=timezone.utc)
 
     return {
         "symbol": first_trade["s"],
         "start_time": first_trade["T"],
         "end_time": last_trade["T"],
-        "first_trade_id": first_trade["t"],
-        "last_trade_id": last_trade["t"],
         "open_price": float(first_trade["p"]),
         "close_price": float(last_trade["p"]),
         "low_price": low_price,

@@ -3,8 +3,6 @@ CREATE TABLE IF NOT EXISTS stg_candles (
     start_time      TIMESTAMPTZ     NOT NULL,
     end_time        TIMESTAMPTZ     NOT NULL,
     candle_interval VARCHAR(10)     NOT NULL,
-    first_trade_id  INTEGER,
-    last_trade_id   INTEGER,
     open_price      NUMERIC(18, 8)  NOT NULL,
     close_price     NUMERIC(18, 8)  NOT NULL,
     low_price       NUMERIC(18, 8)  NOT NULL,
